@@ -1,0 +1,34 @@
+name: Shoaib VPN Android Build
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Check project files
+        run: |
+          echo "Shoaib VPN cloud build environment is ready."
+          echo "Checking for Android Gradle project files..."
+          if [ -f gradlew ]; then
+            echo "Gradle wrapper found."
+          else
+            echo "No Gradle wrapper found yet."
+          fi
+
+      - name: Upload build status
+        run: echo "Cloud workflow completed."
